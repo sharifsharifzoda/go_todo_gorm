@@ -21,7 +21,7 @@ func main() {
 	if err := godotenv.Load(); err != nil {
 		log.Fatal(err)
 	}
-
+	//reading from yaml
 	if err := InitConfigs(); err != nil {
 		log.Fatalf("error while reading config file. error is %v", err.Error())
 	}
