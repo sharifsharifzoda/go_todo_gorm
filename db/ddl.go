@@ -1,0 +1,27 @@
+package db
+
+const (
+	CreateUsersTable = `CREATE TABLE IF NOT EXISTS users(
+    id SERIAL PRIMARY KEY UNIQUE,
+    name VARCHAR(20) NOT NULL,
+    email TEXT NOT NULL UNIQUE,
+    password TEXT NOT NULL,
+    is_active BOOLEAN NOT NULL DEFAULT TRUE,
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP,
+    deleted_at TIMESTAMP 
+	);`
+
+	CreateTasksTable = `CREATE TABLE IF NOT EXISTS tasks(
+    id SERIAL PRIMARY KEY UNIQUE,
+    name VARCHAR(20) NOT NULL,
+    description TEXT,
+    done BOOLEAN NOT NULL DEFAULT FALSE,
+    is_active BOOLEAN NOT NULL DEFAULT TRUE,
+    deadline TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP + INTERVAL '24 hour',
+    user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP,
+    deleted_at TIMESTAMP
+	);`
+)
